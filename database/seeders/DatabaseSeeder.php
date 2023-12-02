@@ -18,5 +18,22 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        \App\Models\Department::create([
+            'name' => 'Orthopaedic',
+            'description' => fake()->sentence()
+        ]);
+        \App\Models\Department::create([
+            'name' => 'Cardiology',
+            'description' => fake()->sentence()
+        ]);
+        \App\Models\Department::create([
+            'name' => 'Pediatrics',
+            'description' => fake()->sentence()
+        ]);
+        \App\Models\Department::create([
+            'name' => 'Gynaecology',
+            'description' => fake()->sentence()
+        ]);
     }
 }
