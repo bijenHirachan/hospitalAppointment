@@ -6,21 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Doctor extends Model
+class Patient extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'qualification',
-        'department_id',
-        'image_url',
         'user_id'
     ];
-
-    public function department(): BelongsTo
-    {
-        return $this->belongsTo(Department::class);
-    }
 
     public function user(): BelongsTo
     {

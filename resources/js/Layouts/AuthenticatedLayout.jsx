@@ -28,20 +28,42 @@ export default function Authenticated({ user, header, children }) {
                                 >
                                     Dashboard
                                 </NavLink>
-                                <NavLink
-                                    href={route("departments.index")}
-                                    active={route().current(
-                                        "departments.index"
-                                    )}
-                                >
-                                    Departments
-                                </NavLink>
-                                <NavLink
-                                    href={route("doctors.index")}
-                                    active={route().current("doctors.index")}
-                                >
-                                    Doctors
-                                </NavLink>
+                                {user.role === "admin" && (
+                                    <>
+                                        <NavLink
+                                            href={route("departments.index")}
+                                            active={route().current(
+                                                "departments.index"
+                                            )}
+                                        >
+                                            Departments
+                                        </NavLink>
+                                        <NavLink
+                                            href={route("doctors.index")}
+                                            active={route().current(
+                                                "doctors.index"
+                                            )}
+                                        >
+                                            Doctors
+                                        </NavLink>
+                                        <NavLink
+                                            href={route("patients.index")}
+                                            active={route().current(
+                                                "patients.index"
+                                            )}
+                                        >
+                                            Patients
+                                        </NavLink>
+                                        <NavLink
+                                            href={route("schedules.index")}
+                                            active={route().current(
+                                                "schedules.index"
+                                            )}
+                                        >
+                                            Schedules
+                                        </NavLink>
+                                    </>
+                                )}
                             </div>
                         </div>
 
@@ -146,18 +168,37 @@ export default function Authenticated({ user, header, children }) {
                         >
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            href={route("departments.index")}
-                            active={route().current("departments.index")}
-                        >
-                            Departments
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            href={route("doctors.index")}
-                            active={route().current("doctors.index")}
-                        >
-                            Doctors
-                        </ResponsiveNavLink>
+                        {user.role === "admin" && (
+                            <>
+                                {" "}
+                                <ResponsiveNavLink
+                                    href={route("departments.index")}
+                                    active={route().current(
+                                        "departments.index"
+                                    )}
+                                >
+                                    Departments
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route("doctors.index")}
+                                    active={route().current("doctors.index")}
+                                >
+                                    Doctors
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route("patients.index")}
+                                    active={route().current("patients.index")}
+                                >
+                                    Patients
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route("schedules.index")}
+                                    active={route().current("schedules.index")}
+                                >
+                                    Schedules
+                                </ResponsiveNavLink>
+                            </>
+                        )}
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200">

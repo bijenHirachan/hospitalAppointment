@@ -12,7 +12,8 @@ class Department extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'image_url'
     ];
 
     public function doctors(): HasMany
