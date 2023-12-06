@@ -2,19 +2,20 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, router } from "@inertiajs/react";
 import { useState } from "react";
 
-const Create = ({ auth, errors }) => {
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
+const Edit = ({ auth, department, errors }) => {
+    const [name, setName] = useState(department.name);
+    const [description, setDescription] = useState(department.description);
 
     const [image, setImage] = useState("");
 
     const submit = (e) => {
         e.preventDefault();
 
-        router.post("/admin/departments", {
+        router.post(`/admin/departments/${department.id}`, {
             name,
             description,
             image,
+            _method: "PUT",
         });
     };
 
@@ -23,7 +24,7 @@ const Create = ({ auth, errors }) => {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Add Department
+                    Update Department
                 </h2>
             }
         >
@@ -85,6 +86,22 @@ const Create = ({ auth, errors }) => {
                                     )}
                                 </div>
 
+                                {department.image_url ? (
+                                    <div className="relative z-0 w-full mb-5 ">
+                                        <img
+                                            className="h-24 rounded w-auto object-cover object-center"
+                                            src={`/storage/${department.image_url}`}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="relative z-0 w-full mb-5 ">
+                                        <img
+                                            className="h-24 rounded w-auto object-cover object-center"
+                                            src={`/assets/noimage.jpg`}
+                                        />
+                                    </div>
+                                )}
+
                                 <div className="relative z-0 w-full mb-5 ">
                                     <label
                                         className="block mb-2 text-sm text-gray-500 dark:text-white"
@@ -112,7 +129,7 @@ const Create = ({ auth, errors }) => {
                                         type="submit"
                                         className="bg-gray-500 text-gray-50 px-2 py-1 rounded-md w-full hover:bg-gray-600 hover:text-gray-100 transition-all delay-75"
                                     >
-                                        Create
+                                        Update
                                     </button>
                                 </div>
                             </form>
@@ -124,4 +141,4 @@ const Create = ({ auth, errors }) => {
     );
 };
 
-export default Create;
+export default Edit;

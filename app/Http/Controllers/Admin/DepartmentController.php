@@ -68,24 +68,40 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Department $department)
     {
-        //
+        return Inertia::render('Admin/Departments/Edit', [
+            'department' => $department
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDepartmentRequest $request, string $id)
+    public function update(UpdateDepartmentRequest $request, Department $department)
     {
-        //
+        $validated = $request->validated();
+
+        if($validated['image']){
+            $image = $validated['image'];
+            $fileName = pathinfo($image->getClientOriginalName())['filename'];
+            $path = $image->storeAs('department_images', $fileName . time() .".". $request->file('image')->getClientOriginalExtension(), 'public');
+        }
+
+        $department->update([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'image_url' => $path ?? $department->image_url,
+        ]);
+
+        return to_route('departments.show', $department->id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Department $department)
     {
-        //
+        $department->delete();
     }
 }

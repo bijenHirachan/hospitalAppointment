@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
     
         Route::resource('patients', PatientController::class)->only(['index', 'show']);
         Route::resource('schedules', ScheduleController::class);
-        // Route::resource('appointments', AppointmentController::class);
+        
         Route::post('/appointments/{schedule}', [AppointmentController::class, 'store']);
         Route::delete('/appointments/{schedule}/all', [AppointmentController::class, 'destroyAll']);
         Route::delete('/appointments/{appointment}', [AppointmentController::class, 'destroy']);
@@ -92,9 +92,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('appointments', DoctorAppointmentController::class);
     });
 
-    // Route::prefix('/patient')->as('patient.')->group(function(){
-    //     Route::resource('doctors', PatientDoctorController::class);
-    // });
 });
 
 require __DIR__.'/auth.php';
