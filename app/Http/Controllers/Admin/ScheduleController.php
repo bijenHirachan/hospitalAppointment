@@ -7,7 +7,9 @@ use App\Http\Resources\ScheduleResource;
 use App\Models\Doctor;
 use App\Models\Schedule;
 use App\Models\Workinghour;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class ScheduleController extends Controller
@@ -62,15 +64,16 @@ class ScheduleController extends Controller
             "doctor" => "required"
         ]);
 
-        $scheduleExists = Schedule::where('doctor_id', $validated['doctor'])
-            ->where('day', $validated['day'])
-            ->where('shift', $validated['shift'])
-            ->first();
+        $scheduleExists = DB::table('schedules')
+                        ->where('doctor_id', $validated['doctor'])
+                        ->whereDate('day', new Carbon($validated['day']))
+                        ->where('shift', $validated['shift'])
+                        ->first();
 
         if(!$scheduleExists){
             $schedule = Schedule::create([
                 'shift' => $validated['shift'],
-                'day' => $validated['day'],
+                'day' => new Carbon($validated['day']),
                 'start_time' => $validated['startTime'],
                 'end_time' => $validated['endTime'],
                 'doctor_id' => $validated["doctor"]
