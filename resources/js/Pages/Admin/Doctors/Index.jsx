@@ -53,12 +53,12 @@ const Doctors = ({ auth, doctors }) => {
                                         <td className="px-6 py-4">
                                             {doctor.image_url ? (
                                                 <img
-                                                    className="h-8 w-8 object-cover object-center rounded-full"
+                                                    className="h-8 w-8 object-cover object-top rounded-full"
                                                     src={`/storage/${doctor.image_url}`}
                                                 />
                                             ) : (
                                                 <img
-                                                    className="h-8 w-8 object-cover object-center rounded-full"
+                                                    className="h-8 w-8 object-cover object-top rounded-full"
                                                     src="/assets/avatar.jpeg"
                                                 />
                                             )}

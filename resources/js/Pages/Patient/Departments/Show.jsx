@@ -51,11 +51,11 @@ const Show = ({ auth, department }) => {
                                             />
                                         )}
                                         <div className="text-center">
-                                            <h2 className="text-gray-600">
-                                                {doctor.name}
+                                            <h2 className="text-gray-600 text-sm">
+                                                Dr. {doctor.name}
                                             </h2>
-                                            <p className="text-gray-500 text-sm">
-                                                {doctor.email}
+                                            <p className="text-gray-500 text-sm font-semibold">
+                                                {doctor.qualification}
                                             </p>
                                         </div>
                                     </Link>

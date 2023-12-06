@@ -61,10 +61,12 @@ const Index = ({ auth, doctor }) => {
                             src="/assets/avatar.jpeg"
                         />
                     )}
-                    <h3 className="text-gray-600 font-semibold mt-2">
-                        {doctor.data.name}
+                    <h3 className="text-gray-600 mt-2">
+                        Dr. {doctor.data.name}
                     </h3>
-                    <p className="text-gray-500 text-sm">{doctor.data.email}</p>
+                    <p className="text-gray-500  font-semibold">
+                        {doctor.data.qualification}
+                    </p>
                 </div>
                 <div className="col-span-2 sm:col-span-1 p-4">
                     {doctor.data.schedules.length > 0 ? (
