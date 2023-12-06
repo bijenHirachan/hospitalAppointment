@@ -7,9 +7,8 @@ use App\Http\Resources\ScheduleResource;
 use App\Models\Doctor;
 use App\Models\Schedule;
 use App\Models\Workinghour;
-use DateTime;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -61,18 +60,18 @@ class ScheduleController extends Controller
             'shift' => 'required',
             'day' => "required",
             'startTime' => "required",
-            'endTime' => "required",
+            'endTime' => "required|after:startTime",
             "doctor" => "required"
         ]);
 
-        $schedule = DB::table('schedules')
+        $scheduleExists = DB::table('schedules')
                         ->where('doctor_id', $validated['doctor'])
-                        ->whereDate('day', new DateTime($validated['day']))
+                        ->whereDate('day', new Carbon($validated['day']))
                         ->where('shift', $validated['shift'])
                         ->first();
 
-        if(!$schedule){
-            Schedule::create([
+        if(!$scheduleExists){
+            $schedule = Schedule::create([
                 'shift' => $validated['shift'],
                 'day' => $validated['day'],
                 'start_time' => $validated['startTime'],
@@ -80,21 +79,21 @@ class ScheduleController extends Controller
                 'doctor_id' => $validated["doctor"]
             ]);
 
-            return to_route('schedules.index');
+            return to_route('schedules.show', $schedule->id);
 
         }else{
             session()->flash('message', 'Schedule already exists');
         }        
-        
-   
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Schedule $schedule)
     {
-        //
+        return Inertia::render('Admin/Schedules/Show', [
+            'schedule' => new ScheduleResource($schedule)
+        ]);
     }
 
     /**

@@ -4,7 +4,7 @@ import { Head } from "@inertiajs/react";
 const Background = ({ user, title, children }) => {
     return (
         <AuthenticatedLayout
-            user={user}
+            user={user ?? null}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
                     {title}

@@ -11,7 +11,7 @@ const Create = ({ auth, departments }) => {
     const submit = (e) => {
         e.preventDefault();
 
-        router.post("/departments", {
+        router.post("/admin/departments", {
             name,
             description,
             image,

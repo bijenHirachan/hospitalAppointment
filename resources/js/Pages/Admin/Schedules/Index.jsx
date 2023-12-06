@@ -48,7 +48,11 @@ const Schedule = ({ auth, schedules }) => {
                                             scope="row"
                                             className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                         >
-                                            {schedule.doctor}
+                                            <Link
+                                                href={`/admin/schedules/${schedule.id}`}
+                                            >
+                                                {schedule.doctor}
+                                            </Link>
                                         </th>
                                         <th
                                             scope="row"

@@ -12,7 +12,7 @@ const Create = ({ auth, departments }) => {
     const submit = (e) => {
         e.preventDefault();
 
-        router.post("/doctors", {
+        router.post("/admin/doctors", {
             name,
             email,
             qualification,

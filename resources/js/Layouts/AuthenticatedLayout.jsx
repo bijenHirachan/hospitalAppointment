@@ -17,100 +17,129 @@ export default function Authenticated({ user, header, children }) {
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <ApplicationLogo classes="h-10" />
                                 </Link>
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route("dashboard")}
-                                    active={route().current("dashboard")}
-                                >
-                                    Dashboard
-                                </NavLink>
-                                {user.role === "admin" && (
-                                    <>
+                            {user && (
+                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    {/* <NavLink
+                                        href={route("dashboard")}
+                                        active={route().current("dashboard")}
+                                    >
+                                        Dashboard
+                                    </NavLink> */}
+                                    {user.role === "admin" && (
+                                        <>
+                                            <NavLink
+                                                href={route(
+                                                    "departments.index"
+                                                )}
+                                                active={route().current(
+                                                    "departments.index"
+                                                )}
+                                            >
+                                                Departments
+                                            </NavLink>
+                                            <NavLink
+                                                href={route("doctors.index")}
+                                                active={route().current(
+                                                    "doctors.index"
+                                                )}
+                                            >
+                                                Doctors
+                                            </NavLink>
+                                            <NavLink
+                                                href={route("patients.index")}
+                                                active={route().current(
+                                                    "patients.index"
+                                                )}
+                                            >
+                                                Patients
+                                            </NavLink>
+                                            <NavLink
+                                                href={route("schedules.index")}
+                                                active={route().current(
+                                                    "schedules.index"
+                                                )}
+                                            >
+                                                Schedules
+                                            </NavLink>
+                                        </>
+                                    )}
+                                    {user.role === "doctor" && (
                                         <NavLink
-                                            href={route("departments.index")}
-                                            active={route().current(
-                                                "departments.index"
+                                            href={route(
+                                                "doctor.schedules.index"
                                             )}
-                                        >
-                                            Departments
-                                        </NavLink>
-                                        <NavLink
-                                            href={route("doctors.index")}
                                             active={route().current(
-                                                "doctors.index"
-                                            )}
-                                        >
-                                            Doctors
-                                        </NavLink>
-                                        <NavLink
-                                            href={route("patients.index")}
-                                            active={route().current(
-                                                "patients.index"
-                                            )}
-                                        >
-                                            Patients
-                                        </NavLink>
-                                        <NavLink
-                                            href={route("schedules.index")}
-                                            active={route().current(
-                                                "schedules.index"
+                                                "doctor.schedules.index"
                                             )}
                                         >
                                             Schedules
                                         </NavLink>
-                                    </>
-                                )}
-                            </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
 
-                        <div className="hidden sm:flex sm:items-center sm:ms-6">
-                            <div className="ms-3 relative">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                            >
-                                                {user.name}
-
-                                                <svg
-                                                    className="ms-2 -me-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
+                        {user ? (
+                            <div className="hidden sm:flex sm:items-center sm:ms-6">
+                                <div className="ms-3 relative">
+                                    <Dropdown>
+                                        <Dropdown.Trigger>
+                                            <span className="inline-flex rounded-md">
+                                                <button
+                                                    type="button"
+                                                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                                 >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </Dropdown.Trigger>
+                                                    {user.name}
 
-                                    <Dropdown.Content>
-                                        <Dropdown.Link
-                                            href={route("profile.edit")}
-                                        >
-                                            Profile
-                                        </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href={route("logout")}
-                                            method="post"
-                                            as="button"
-                                        >
-                                            Log Out
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-                                </Dropdown>
+                                                    <svg
+                                                        className="ms-2 -me-0.5 h-4 w-4"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path
+                                                            fillRule="evenodd"
+                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                            clipRule="evenodd"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                            </span>
+                                        </Dropdown.Trigger>
+
+                                        <Dropdown.Content>
+                                            <Dropdown.Link
+                                                href={route("profile.edit")}
+                                            >
+                                                Profile
+                                            </Dropdown.Link>
+                                            <Dropdown.Link
+                                                href={route("logout")}
+                                                method="post"
+                                                as="button"
+                                            >
+                                                Log Out
+                                            </Dropdown.Link>
+                                        </Dropdown.Content>
+                                    </Dropdown>
+                                </div>
                             </div>
-                        </div>
+                        ) : (
+                            <div className="hidden sm:flex sm:items-center sm:ms-6">
+                                <div className="ms-3 relative">
+                                    <NavLink href={route("login")}>
+                                        Login
+                                    </NavLink>
+                                    <NavLink href={route("register")}>
+                                        Register
+                                    </NavLink>
+                                </div>
+                            </div>
+                        )}
 
                         <div className="-me-2 flex items-center sm:hidden">
                             <button
@@ -155,76 +184,115 @@ export default function Authenticated({ user, header, children }) {
                     </div>
                 </div>
 
-                <div
-                    className={
-                        (showingNavigationDropdown ? "block" : "hidden") +
-                        " sm:hidden"
-                    }
-                >
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={route().current("dashboard")}
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
-                        {user.role === "admin" && (
-                            <>
-                                {" "}
+                {user ? (
+                    <div
+                        className={
+                            (showingNavigationDropdown ? "block" : "hidden") +
+                            " sm:hidden"
+                        }
+                    >
+                        <div className="pt-2 pb-3 space-y-1">
+                            {/* <ResponsiveNavLink
+                                href={route("dashboard")}
+                                active={route().current("dashboard")}
+                            >
+                                Dashboard
+                            </ResponsiveNavLink> */}
+                            {user.role === "admin" && (
+                                <>
+                                    {" "}
+                                    <ResponsiveNavLink
+                                        href={route("departments.index")}
+                                        active={route().current(
+                                            "departments.index"
+                                        )}
+                                    >
+                                        Departments
+                                    </ResponsiveNavLink>
+                                    <ResponsiveNavLink
+                                        href={route("doctors.index")}
+                                        active={route().current(
+                                            "doctors.index"
+                                        )}
+                                    >
+                                        Doctors
+                                    </ResponsiveNavLink>
+                                    <ResponsiveNavLink
+                                        href={route("patients.index")}
+                                        active={route().current(
+                                            "patients.index"
+                                        )}
+                                    >
+                                        Patients
+                                    </ResponsiveNavLink>
+                                    <ResponsiveNavLink
+                                        href={route("schedules.index")}
+                                        active={route().current(
+                                            "schedules.index"
+                                        )}
+                                    >
+                                        Schedules
+                                    </ResponsiveNavLink>
+                                </>
+                            )}
+
+                            {user.role === "doctor" && (
                                 <ResponsiveNavLink
-                                    href={route("departments.index")}
+                                    href={route("doctor.schedules.index")}
                                     active={route().current(
-                                        "departments.index"
+                                        "doctor.schedules.index"
                                     )}
-                                >
-                                    Departments
-                                </ResponsiveNavLink>
-                                <ResponsiveNavLink
-                                    href={route("doctors.index")}
-                                    active={route().current("doctors.index")}
-                                >
-                                    Doctors
-                                </ResponsiveNavLink>
-                                <ResponsiveNavLink
-                                    href={route("patients.index")}
-                                    active={route().current("patients.index")}
-                                >
-                                    Patients
-                                </ResponsiveNavLink>
-                                <ResponsiveNavLink
-                                    href={route("schedules.index")}
-                                    active={route().current("schedules.index")}
                                 >
                                     Schedules
                                 </ResponsiveNavLink>
-                            </>
-                        )}
-                    </div>
-
-                    <div className="pt-4 pb-1 border-t border-gray-200">
-                        <div className="px-4">
-                            <div className="font-medium text-base text-gray-800">
-                                {user.name}
-                            </div>
-                            <div className="font-medium text-sm text-gray-500">
-                                {user.email}
-                            </div>
+                            )}
                         </div>
 
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route("profile.edit")}>
-                                Profile
-                            </ResponsiveNavLink>
-                            <ResponsiveNavLink
-                                method="post"
-                                href={route("logout")}
-                                as="button"
-                            >
-                                Log Out
-                            </ResponsiveNavLink>
+                        <div className="pt-4 pb-1 border-t border-gray-200">
+                            <div className="px-4">
+                                <div className="font-medium text-base text-gray-800">
+                                    {user.name}
+                                </div>
+                                <div className="font-medium text-sm text-gray-500">
+                                    {user.email}
+                                </div>
+                            </div>
+
+                            <div className="mt-3 space-y-1">
+                                <ResponsiveNavLink href={route("profile.edit")}>
+                                    Profile
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    method="post"
+                                    href={route("logout")}
+                                    as="button"
+                                >
+                                    Log Out
+                                </ResponsiveNavLink>
+                            </div>
                         </div>
                     </div>
-                </div>
+                ) : (
+                    <div
+                        className={
+                            (showingNavigationDropdown ? "block" : "hidden") +
+                            " sm:hidden"
+                        }
+                    >
+                        <div className="pt-2 pb-3 space-y-1">
+                            <div className="pt-4 pb-1 border-t border-gray-200">
+                                <div className="mt-3 space-y-1">
+                                    <ResponsiveNavLink href={route("login")}>
+                                        Login
+                                    </ResponsiveNavLink>
+                                    <ResponsiveNavLink href={route("register")}>
+                                        Register
+                                    </ResponsiveNavLink>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </nav>
 
             {header && (

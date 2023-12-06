@@ -21,7 +21,8 @@ class ScheduleResource extends JsonResource
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
             'doctor' => $this->doctor->user->name,
-            'doctor_id' => $this->doctor->id
+            'doctor_id' => $this->doctor->id,
+            'appointments' => AppointmentResource::collection($this->appointments)
         ];
     }
 }

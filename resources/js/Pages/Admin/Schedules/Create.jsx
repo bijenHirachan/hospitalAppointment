@@ -4,7 +4,14 @@ import { router } from "@inertiajs/react";
 import dayjs from "dayjs";
 import { useState } from "react";
 
-export default function create({ auth, workinghours, days, doctors }) {
+export default function create({
+    auth,
+    workinghours,
+    days,
+    doctors,
+    errors,
+    flash,
+}) {
     const [doctor, setDoctor] = useState("");
     const [shift, setShift] = useState("");
     const [day, setDay] = useState("");
@@ -15,18 +22,19 @@ export default function create({ auth, workinghours, days, doctors }) {
         e.preventDefault();
 
         try {
-            router.post("/schedules", {
-                doctor,
-                shift,
-                day,
-                startTime,
-                endTime,
-            });
-            setDoctor("");
-            setShift("");
-            setDay("");
-            setStartTime("");
-            setEndTime("");
+            router.post(
+                "/admin/schedules",
+                {
+                    doctor,
+                    shift,
+                    day,
+                    startTime,
+                    endTime,
+                },
+                {
+                    preserveState: true,
+                }
+            );
         } catch (error) {
             console.log(error);
         }
@@ -42,6 +50,9 @@ export default function create({ auth, workinghours, days, doctors }) {
 
     return (
         <Background user={auth.user} title={"Schedules"}>
+            {flash.message && (
+                <span className="text-xs text-red-500">{flash.message}</span>
+            )}
             <form onSubmit={submit} className="">
                 <div className="relative z-0 w-full mb-5 group">
                     <label className="text-sm text-gray-500">Doctor</label>
@@ -59,6 +70,11 @@ export default function create({ auth, workinghours, days, doctors }) {
                                 </option>
                             ))}
                     </select>
+                    {errors.doctor && (
+                        <span className="text-xs text-red-500">
+                            {errors.doctor}
+                        </span>
+                    )}
                 </div>
                 <div className="relative z-0 w-full mb-5 group">
                     <label className="text-sm text-gray-500">Day</label>
@@ -76,6 +92,11 @@ export default function create({ auth, workinghours, days, doctors }) {
                                 </option>
                             ))}
                     </select>
+                    {errors.day && (
+                        <span className="text-xs text-red-500">
+                            {errors.day}
+                        </span>
+                    )}
                 </div>
                 <div className="relative z-0 w-full mb-5 group">
                     <label className="text-sm text-gray-500">Shift</label>
@@ -92,6 +113,11 @@ export default function create({ auth, workinghours, days, doctors }) {
                         <option value={"day"}>Day</option>
                         <option value={"night"}>Night</option>
                     </select>
+                    {errors.shift && (
+                        <span className="text-xs text-red-500">
+                            {errors.shift}
+                        </span>
+                    )}
                 </div>
                 <div className="relative z-0 w-full mb-5 group">
                     <label className="text-sm text-gray-500">Start Time</label>
@@ -109,6 +135,11 @@ export default function create({ auth, workinghours, days, doctors }) {
                                 </option>
                             ))}
                     </select>
+                    {errors.startTime && (
+                        <span className="text-xs text-red-500">
+                            {errors.startTime}
+                        </span>
+                    )}
                 </div>
                 <div className="relative z-0 w-full mb-5 group">
                     <label className="text-sm text-gray-500">End Time</label>
@@ -126,6 +157,11 @@ export default function create({ auth, workinghours, days, doctors }) {
                                 </option>
                             ))}
                     </select>
+                    {errors.endTime && (
+                        <span className="text-xs text-red-500">
+                            {errors.endTime}
+                        </span>
+                    )}
                 </div>
 
                 <PrimaryButton type="submit">Create</PrimaryButton>
