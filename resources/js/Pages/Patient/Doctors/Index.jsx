@@ -52,12 +52,12 @@ const Index = ({ auth, doctor }) => {
                 <div className="col-span-2 sm:col-span-1 p-4 flex flex-col justify-center items-center">
                     {doctor.data.image_url ? (
                         <img
-                            className="h-40 w-40 rounded-full object-cover object-center"
+                            className="h-40 w-40 rounded-full object-cover object-top"
                             src={`/storage/${doctor.data.image_url}`}
                         />
                     ) : (
                         <img
-                            className="h-40 w-40 rounded-full object-cover object-center"
+                            className="h-40 w-40 rounded-full object-cover object-top"
                             src="/assets/avatar.jpeg"
                         />
                     )}
@@ -67,7 +67,7 @@ const Index = ({ auth, doctor }) => {
                     <p className="text-gray-500 text-sm">{doctor.data.email}</p>
                 </div>
                 <div className="col-span-2 sm:col-span-1 p-4">
-                    {doctor.data.schedules.length > 0 && (
+                    {doctor.data.schedules.length > 0 ? (
                         <div className="flex flex-col gap-2">
                             {doctor.data.schedules.map((schedule) => (
                                 <div
@@ -128,6 +128,12 @@ const Index = ({ auth, doctor }) => {
                                     )}
                                 </div>
                             ))}
+                        </div>
+                    ) : (
+                        <div className="flex items-center justify-center">
+                            <p className="text-gray-500">
+                                Sorry! No appointments available right now.
+                            </p>
                         </div>
                     )}
                 </div>

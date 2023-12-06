@@ -41,12 +41,12 @@ const Show = ({ auth, department }) => {
                                     >
                                         {doctor.image_url ? (
                                             <img
-                                                className="h-24 border border-gray-300 w-24 rounded-full object-cover object-center"
+                                                className="h-24 w-24 rounded-full object-cover object-top"
                                                 src={`/storage/${doctor.image_url}`}
                                             />
                                         ) : (
                                             <img
-                                                className="h-24 border border-gray-300 w-24 rounded-full object-cover object-center"
+                                                className="h-24  w-24 rounded-full object-cover object-center"
                                                 src="/assets/avatar.jpeg"
                                             />
                                         )}
