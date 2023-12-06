@@ -87,7 +87,10 @@ export default function create({
                         <option value={""}>Select day</option>
                         {days.length > 0 &&
                             days.map((day, index) => (
-                                <option key={index} value={day}>
+                                <option
+                                    key={index}
+                                    value={dayjs(day).format("DD/MM/YYYY")}
+                                >
                                     {dayjs(day).format("DD/MM/YYYY")}
                                 </option>
                             ))}
