@@ -27,7 +27,7 @@ class AppointmentController extends Controller
         {
             $newTime = date("G:i", (new Carbon($startTime))->addMinutes((int)$request->duration)->getTimestamp());
             
-            array_push($arr, ['schedule_id' => $schedule->id, 'status' => "available", 'time_slot' => $startTime. ' - ' . $newTime]);
+            array_push($arr, ['schedule_id' => $schedule->id, 'status' => "available", 'time_slot' => date("G:i", (new Carbon($startTime))->getTimestamp()). ' - ' . $newTime]);
 
             $startTime = date("G:i", (new Carbon($startTime))->addMinutes((int)$request->duration)->getTimestamp());
         }

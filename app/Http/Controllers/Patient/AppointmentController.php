@@ -13,7 +13,7 @@ class AppointmentController extends Controller
     {
         $appointment->update([
             'status' => AppointmentStatusEnum::BOOKED,
-            'patient_id' => auth()->user()->id
+            'patient_id' => auth()->user()->patient->id
         ]);
     }
 }
