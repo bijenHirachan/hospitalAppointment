@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, router, useForm } from "@inertiajs/react";
+import toast from "react-hot-toast";
 
 const CreateTicket = ({ auth, labels, categories, priorities }) => {
     const { data, setData, post, progress } = useForm({

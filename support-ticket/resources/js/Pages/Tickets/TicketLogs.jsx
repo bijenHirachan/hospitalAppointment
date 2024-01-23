@@ -1,6 +1,7 @@
 import Paginator from "@/Components/Paginator";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
+import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 
 const TicketLogs = ({
@@ -87,7 +88,8 @@ const TicketLogs = ({
                                     <tr>
                                         <th>Description</th>
                                         <th>Causer</th>
-                                        <th>Subject</th>
+                                        <th>Ticket</th>
+                                        <th>Time</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -106,6 +108,20 @@ const TicketLogs = ({
                                                     href={`/tickets/${log.subject.id}`}
                                                 >
                                                     {log.subject.title}
+                                                </Link>
+                                            </td>
+                                            <td>
+                                                <Link
+                                                    href={`/tickets/${log.subject.id}`}
+                                                    className="text-xs"
+                                                >
+                                                    {dayjs(
+                                                        log.created_at
+                                                    ).format("DD/MM/YYYY")}{" "}
+                                                    on{" "}
+                                                    {dayjs(
+                                                        log.created_at
+                                                    ).format("HH:mm")}
                                                 </Link>
                                             </td>
                                         </tr>

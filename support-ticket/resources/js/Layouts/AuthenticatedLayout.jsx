@@ -6,6 +6,7 @@ import { MdOutlineEventNote } from "react-icons/md";
 import { BiCategory } from "react-icons/bi";
 import { IoPricetagsOutline, IoSettingsOutline } from "react-icons/io5";
 import MenuItem from "@/Components/Sidebar/MenuItem";
+import { Toaster } from "react-hot-toast";
 
 export default function AuthenticatedLayout({ user, children }) {
     return (
@@ -93,6 +94,7 @@ export default function AuthenticatedLayout({ user, children }) {
                 </div>
             </div>
 
+            <Toaster />
             <div className="bg-sky-200 w-full p-6">{children}</div>
         </div>
     );

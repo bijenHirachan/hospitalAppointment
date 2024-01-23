@@ -13,7 +13,7 @@ export default function Welcome({ auth }) {
                     src={image}
                     alt=""
                 />
-                <h3 className="text-sky-50 font-bold text-4xl leading-9 mt-8">
+                <h3 className="text-sky-50 font-bold text-3xl leading-9 mt-8">
                     Create your support ticket!
                 </h3>
                 <p className="text-sm text-sky-50 leading-7 mt-4">

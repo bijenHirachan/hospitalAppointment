@@ -124,9 +124,9 @@ class TicketController extends Controller
         activity()
             ->causedBy(auth()->user())
             ->performedOn($ticket)
-            ->log(auth()->user()->name . ' has created a ticket titled: '. $ticket->title.'.');
+            ->log("Ticket Created");
 
-        return to_route('tickets.index');
+        return to_route('tickets.show', $ticket->id);
         
     }
 
@@ -164,7 +164,7 @@ class TicketController extends Controller
 
         activity()
             ->performedOn($ticket)
-            ->log($agent->name. ' has been assigned a ticket titled: '. $ticket->title.'.');
+            ->log("Ticket Assigned");
     }
 
 
@@ -178,10 +178,12 @@ class TicketController extends Controller
             'status' => $ticket->status === TicketStatusEnum::CLOSED ? TicketStatusEnum::OPEN : TicketStatusEnum::CLOSED
         ]);
 
+        $status = $ticket->status === TicketStatusEnum::CLOSED ? "closed." : "reopened.";
+
         activity()
             ->causedBy(auth()->user())
             ->performedOn($ticket)
-            ->log(auth()->user()->name. ' has changed the status of a ticket titled: '. $ticket->title .' to '.$ticket->status->value.'.');
+            ->log("Ticket ". $status );
 
     }
     /**
@@ -205,6 +207,7 @@ class TicketController extends Controller
                         ->when($request->query('ticket') !== "" && $request->query('ticket') !== null, function (Builder $query) use($request){
                             return $query->whereRelation('subject', 'title', 'like', '%'.$request->query('ticket').'%');
                         })
+                        ->latest()
                         ->paginate(5)
                         ->withQueryString(),
             'searchQuery' => $request->query('search'),
