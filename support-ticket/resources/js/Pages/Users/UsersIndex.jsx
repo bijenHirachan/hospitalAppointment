@@ -86,7 +86,7 @@ const UsersIndex = ({ auth, users, roles, searchQuery, roleQuery }) => {
                         </select>
                     </div>
 
-                    {users.data.length > 0 && (
+                    {users.data.length > 0 ? (
                         <div className="overflow-x-auto bg-white p-4 rounded">
                             <div className="text-sm mb-2">
                                 {users.total} users
@@ -124,6 +124,10 @@ const UsersIndex = ({ auth, users, roles, searchQuery, roleQuery }) => {
                                 currentPage={users.current_page}
                                 lastPage={users.last_page}
                             />
+                        </div>
+                    ) : (
+                        <div className="text-sky-500 my-16 text-center">
+                            No Users Found
                         </div>
                     )}
                 </div>

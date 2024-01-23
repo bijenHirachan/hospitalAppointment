@@ -94,41 +94,48 @@ const LabelsIndex = ({ auth, labels, searchQuery }) => {
                         </form>
                     </div>
                     <div className="overflow-x-auto bg-white p-4 rounded">
-                        <div className="text-sm mb-2">
-                            {labels.total} labels
-                        </div>
-                        <table className="table table-sm text-gray-600">
-                            <thead className="text-gray-700">
-                                <tr>
-                                    <th>Label</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {labels.data.length > 0 &&
-                                    labels.data.map((label) => (
-                                        <tr key={`label-${label.id}`}>
-                                            <td>{label.name}</td>
-                                            <td>
-                                                <Link
-                                                    href={`/labels/${label.id}`}
-                                                    method="delete"
-                                                    as="button"
-                                                    className="text-xs text-red-500 font-semibold hover:text-red-600 transition-all delay-75"
-                                                >
-                                                    Delete
-                                                </Link>
-                                            </td>
+                        {labels.data.length > 0 ? (
+                            <>
+                                <div className="text-sm mb-2">
+                                    {labels.total} labels
+                                </div>
+                                <table className="table table-sm text-gray-600">
+                                    <thead className="text-gray-700">
+                                        <tr>
+                                            <th>Label</th>
+                                            <th>Action</th>
                                         </tr>
-                                    ))}
-                            </tbody>
-                        </table>
-                        <Paginator
-                            page={page}
-                            setPage={setPage}
-                            currentPage={labels.current_page}
-                            lastPage={labels.last_page}
-                        />
+                                    </thead>
+                                    <tbody>
+                                        {labels.data.map((label) => (
+                                            <tr key={`label-${label.id}`}>
+                                                <td>{label.name}</td>
+                                                <td>
+                                                    <Link
+                                                        href={`/labels/${label.id}`}
+                                                        method="delete"
+                                                        as="button"
+                                                        className="text-xs text-red-500 font-semibold hover:text-red-600 transition-all delay-75"
+                                                    >
+                                                        Delete
+                                                    </Link>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                                <Paginator
+                                    page={page}
+                                    setPage={setPage}
+                                    currentPage={labels.current_page}
+                                    lastPage={labels.last_page}
+                                />
+                            </>
+                        ) : (
+                            <div className="text-sky-500 my-16 text-center">
+                                No Labels Found
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

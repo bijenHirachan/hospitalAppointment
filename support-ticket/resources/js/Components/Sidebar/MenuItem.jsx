@@ -9,7 +9,7 @@ const MenuItem = ({ routeName, icon, text }) => {
         >
             <div
                 className={`${
-                    route().current(routeName)
+                    route().current(routeName.split(".")[0] + ".*")
                         ? "text-orange-500"
                         : "text-sky-50"
                 } text-xl group-hover:text-orange-500 transition-all delay-75`}
@@ -18,7 +18,7 @@ const MenuItem = ({ routeName, icon, text }) => {
             </div>
             <span
                 className={`${
-                    route().current(routeName)
+                    route().current(routeName.split(".")[0] + ".*")
                         ? "text-orange-500"
                         : "text-sky-50"
                 } text-sm hidden sm:block font-semibold group-hover:text-orange-500 transition-all delay-75`}

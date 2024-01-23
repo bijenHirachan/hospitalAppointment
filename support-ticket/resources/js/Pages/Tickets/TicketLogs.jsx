@@ -76,7 +76,7 @@ const TicketLogs = ({
                             className="border-none text-sky-500 focus:ring-0 rounded bg-white text-xs"
                         />
                     </div>
-                    {logs.data.length > 0 && (
+                    {logs.data.length > 0 ? (
                         <div className="overflow-x-auto bg-white p-4 rounded">
                             <div className="text-sm mb-2">
                                 {logs.total} logs
@@ -118,6 +118,10 @@ const TicketLogs = ({
                                 currentPage={logs.current_page}
                                 lastPage={logs.last_page}
                             />
+                        </div>
+                    ) : (
+                        <div className="text-sky-500 my-16 text-center">
+                            No Ticket Logs
                         </div>
                     )}
                 </div>

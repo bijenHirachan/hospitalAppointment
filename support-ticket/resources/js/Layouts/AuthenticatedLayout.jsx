@@ -19,13 +19,16 @@ export default function AuthenticatedLayout({ user, children }) {
                 </Link>
 
                 <ul className="flex flex-col gap-2">
-                    <li>
-                        <MenuItem
-                            routeName={"dashboard"}
-                            icon={<AiOutlineDashboard />}
-                            text={"Dashboard"}
-                        />
-                    </li>
+                    {user.role === "admin" && (
+                        <li>
+                            <MenuItem
+                                routeName={"dashboard"}
+                                icon={<AiOutlineDashboard />}
+                                text={"Dashboard"}
+                            />
+                        </li>
+                    )}
+
                     <li>
                         <MenuItem
                             routeName={"tickets.index"}
@@ -33,34 +36,38 @@ export default function AuthenticatedLayout({ user, children }) {
                             text={"Tickets"}
                         />
                     </li>
-                    <li>
-                        <MenuItem
-                            routeName={"users.index"}
-                            icon={<PiUsersThreeLight />}
-                            text={"Users"}
-                        />
-                    </li>
-                    <li>
-                        <MenuItem
-                            routeName={"ticket-logs"}
-                            icon={<MdOutlineEventNote />}
-                            text={"Ticket Logs"}
-                        />
-                    </li>
-                    <li>
-                        <MenuItem
-                            routeName={"categories.index"}
-                            icon={<BiCategory />}
-                            text={"Categories"}
-                        />
-                    </li>
-                    <li>
-                        <MenuItem
-                            routeName={"labels.index"}
-                            icon={<IoPricetagsOutline />}
-                            text={"Labels"}
-                        />
-                    </li>
+                    {user.role === "admin" && (
+                        <>
+                            <li>
+                                <MenuItem
+                                    routeName={"users.index"}
+                                    icon={<PiUsersThreeLight />}
+                                    text={"Users"}
+                                />
+                            </li>
+                            <li>
+                                <MenuItem
+                                    routeName={"ticket-logs"}
+                                    icon={<MdOutlineEventNote />}
+                                    text={"Ticket Logs"}
+                                />
+                            </li>
+                            <li>
+                                <MenuItem
+                                    routeName={"categories.index"}
+                                    icon={<BiCategory />}
+                                    text={"Categories"}
+                                />
+                            </li>
+                            <li>
+                                <MenuItem
+                                    routeName={"labels.index"}
+                                    icon={<IoPricetagsOutline />}
+                                    text={"Labels"}
+                                />
+                            </li>
+                        </>
+                    )}
                 </ul>
 
                 <div className="flex flex-col gap-2">

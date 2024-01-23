@@ -129,7 +129,7 @@ const TicketsIndex = ({
                                 ))}
                         </select>
                     </div>
-                    {tickets.data.length > 0 && (
+                    {tickets.data.length > 0 ? (
                         <div className="overflow-x-auto bg-white p-4 rounded">
                             <div className="text-sm mb-2">
                                 {tickets.total} tickets
@@ -143,15 +143,18 @@ const TicketsIndex = ({
                                     />
                                 ))}
                             </div>
+                            <Paginator
+                                page={page}
+                                setPage={setPage}
+                                currentPage={tickets.current_page}
+                                lastPage={tickets.last_page}
+                            />
+                        </div>
+                    ) : (
+                        <div className="text-sky-500 my-16 text-center">
+                            No Tickets Found
                         </div>
                     )}
-
-                    <Paginator
-                        page={page}
-                        setPage={setPage}
-                        currentPage={tickets.current_page}
-                        lastPage={tickets.last_page}
-                    />
                 </div>
             </div>
         </AuthenticatedLayout>

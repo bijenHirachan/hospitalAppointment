@@ -96,42 +96,49 @@ const CategoriesIndex = ({ auth, categories, searchQuery }) => {
                         </form>
                     </div>
                     <div className="overflow-x-auto bg-white p-4 rounded">
-                        <div className="text-sm mb-2">
-                            {categories.total} categories
-                        </div>
+                        {categories.data.length > 0 ? (
+                            <>
+                                <div className="text-sm mb-2">
+                                    {categories.total} categories
+                                </div>
 
-                        <table className="table table-sm text-gray-600">
-                            <thead className="text-gray-700">
-                                <tr>
-                                    <th>Category</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {categories.data.length > 0 &&
-                                    categories.data.map((category) => (
-                                        <tr key={`category-${category.id}`}>
-                                            <td>{category.name}</td>
-                                            <td>
-                                                <Link
-                                                    href={`/categories/${category.id}`}
-                                                    method="delete"
-                                                    as="button"
-                                                    className="text-xs text-red-500 font-semibold hover:text-red-600 transition-all delay-75"
-                                                >
-                                                    Delete
-                                                </Link>
-                                            </td>
+                                <table className="table table-sm text-gray-600">
+                                    <thead className="text-gray-700">
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Action</th>
                                         </tr>
-                                    ))}
-                            </tbody>
-                        </table>
-                        <Paginator
-                            page={page}
-                            setPage={setPage}
-                            currentPage={categories.current_page}
-                            lastPage={categories.last_page}
-                        />
+                                    </thead>
+                                    <tbody>
+                                        {categories.data.map((category) => (
+                                            <tr key={`category-${category.id}`}>
+                                                <td>{category.name}</td>
+                                                <td>
+                                                    <Link
+                                                        href={`/categories/${category.id}`}
+                                                        method="delete"
+                                                        as="button"
+                                                        className="text-xs text-red-500 font-semibold hover:text-red-600 transition-all delay-75"
+                                                    >
+                                                        Delete
+                                                    </Link>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                                <Paginator
+                                    page={page}
+                                    setPage={setPage}
+                                    currentPage={categories.current_page}
+                                    lastPage={categories.last_page}
+                                />
+                            </>
+                        ) : (
+                            <div className="text-sky-500 my-16 text-center">
+                                No Categories Found
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
