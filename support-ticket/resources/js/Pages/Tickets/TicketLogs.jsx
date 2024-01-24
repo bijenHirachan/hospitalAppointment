@@ -111,10 +111,7 @@ const TicketLogs = ({
                                                 </Link>
                                             </td>
                                             <td>
-                                                <Link
-                                                    href={`/tickets/${log.subject.id}`}
-                                                    className="text-xs"
-                                                >
+                                                <div className="text-xs">
                                                     {dayjs(
                                                         log.created_at
                                                     ).format("DD/MM/YYYY")}{" "}
@@ -122,7 +119,7 @@ const TicketLogs = ({
                                                     {dayjs(
                                                         log.created_at
                                                     ).format("HH:mm")}
-                                                </Link>
+                                                </div>
                                             </td>
                                         </tr>
                                     ))}
