@@ -4,10 +4,7 @@ import React from "react";
 
 const TicketCard = ({ user, ticket }) => {
     return (
-        <Link
-            href={`/tickets/${ticket.id}`}
-            className="col-span-12 sm:col-span-6  border border-sky-500 rounded shadow-md p-2"
-        >
+        <div className="col-span-12 sm:col-span-6  border border-sky-500 rounded shadow-md p-2">
             <div className="flex items-center justify-between text-gray-600  text-[10px] leading-4">
                 {user.role === "admin" ? (
                     <Link
@@ -23,9 +20,12 @@ const TicketCard = ({ user, ticket }) => {
                     {dayjs(ticket.created_at).format("DD/MM/YYYY")}
                 </span>
             </div>
-            <h3 className="text-sky-500 font-semibold leading-5">
+            <Link
+                href={`/tickets/${ticket.id}`}
+                className="text-sky-500 font-semibold leading-5 hover:underline transition-all delay-75"
+            >
                 {ticket.title}
-            </h3>
+            </Link>
             <div className="flex gap-2 my-3">
                 <h3
                     className={`text-xs border w-fit px-1 rounded ${
@@ -78,7 +78,7 @@ const TicketCard = ({ user, ticket }) => {
                     <span className="text-sm">Not Assigned</span>
                 )}
             </div>
-        </Link>
+        </div>
     );
 };
 
