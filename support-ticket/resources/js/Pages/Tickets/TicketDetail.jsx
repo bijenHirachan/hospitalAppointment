@@ -2,6 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import dayjs from "dayjs";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const TicketDetail = ({ auth, ticket, agents, errors }) => {
     const [selectedAgent, setSelectedAgent] = useState(
@@ -26,16 +27,22 @@ const TicketDetail = ({ auth, ticket, agents, errors }) => {
                 preserveState: true,
                 preserveScroll: true,
                 replace: true,
+                onSuccess: () => toast.success("Ticket assigned!"),
             }
         );
     };
 
     const closeTicketHandler = () => {
-        router.put(`/tickets/${ticket.id}/close`, {
-            preserveState: true,
-            preserveScroll: true,
-            replace: true,
-        });
+        router.put(
+            `/tickets/${ticket.id}/close`,
+            {},
+            {
+                preserveState: true,
+                preserveScroll: true,
+                replace: true,
+                onSuccess: () => toast.success("Ticket status updated!"),
+            }
+        );
     };
 
     const addCommentHandler = (e) => {
