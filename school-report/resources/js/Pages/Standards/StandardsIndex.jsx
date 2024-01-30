@@ -23,18 +23,42 @@ const StandardsIndex = ({ auth, standards }) => {
                                     <Link
                                         key={standard.id}
                                         href={`/standards/${standard.id}`}
-                                        className="bg-sky-200 p-4 col-span-6 sm:col-span-3 rounded shadow"
+                                        className="bg-sky-200 p-4 col-span-12 sm:col-span-6 md:col-span-4 rounded shadow  leading-6 tracking-wide"
                                     >
-                                        <div className="text-sm text-gray-600">
-                                            Standard{" "}
-                                            <span className="font-bold">
-                                                {standard.title}
+                                        <div className="text-sm text-gray-600 grid grid-cols-12">
+                                            <span className="p-1 col-span-7 border-t border-l border-gray-500">
+                                                Standard
+                                            </span>
+                                            <span className="p-1 uppercase font-bold col-span-5 border-t border-l border-r  border-gray-500">
+                                                {standard.title}{" "}
+                                                {standard.section}
                                             </span>
                                         </div>
-                                        <div className="text-sm text-gray-600">
-                                            Section{" "}
-                                            <span className="uppercase font-bold">
-                                                {standard.section}
+
+                                        <div className="text-sm text-gray-600 grid grid-cols-12">
+                                            <span className="p-1 col-span-7 border-t border-l border-gray-500">
+                                                No of students
+                                            </span>
+                                            <span className="p-1 uppercase font-bold col-span-5 border-t border-l border-r  border-gray-500">
+                                                {standard.students.length}
+                                            </span>
+                                        </div>
+                                        <div className="text-sm text-gray-600 grid grid-cols-12">
+                                            <span className="p-1 col-span-7 border-t border-l border-gray-500">
+                                                No of subjects
+                                            </span>
+                                            <span className="p-1 uppercase font-bold col-span-5 border-t border-l border-r  border-gray-500">
+                                                {standard.subjects.length}
+                                            </span>
+                                        </div>
+                                        <div className="text-sm text-gray-600 grid grid-cols-12">
+                                            <span className="p-1 col-span-7 border-t border-l border-b border-gray-500">
+                                                Teacher
+                                            </span>
+                                            <span className="p-1 uppercase font-bold col-span-5 border border-gray-500">
+                                                {standard.user
+                                                    ? standard.user?.name
+                                                    : "N/A"}
                                             </span>
                                         </div>
                                     </Link>

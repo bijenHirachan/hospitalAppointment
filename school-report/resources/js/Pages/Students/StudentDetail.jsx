@@ -1,6 +1,7 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Head, router } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
+import { GrDownload } from "react-icons/gr";
 
 const StudentDetail = ({ auth, student }) => {
     const [marks, setMarks] = useState([]);
@@ -15,6 +16,10 @@ const StudentDetail = ({ auth, student }) => {
         });
 
         return score;
+    };
+
+    const totalScore = () => {
+        return student.scores.reduce((acc, sco) => acc + sco.marks, 0);
     };
 
     useEffect(() => {
@@ -53,6 +58,16 @@ const StudentDetail = ({ auth, student }) => {
                         <div className="p-6 text-gray-900">
                             <div className="flex flex-col pb-4 justify-between">
                                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                                    <div className="my-2 flex justify-end">
+                                        <a
+                                            target="_blank"
+                                            href={`/view-pdf/${student.id}`}
+                                            className=" text-gray-600 px-2 py-1 text-sm font-semibold hover:underline flex items-center gap-1 transition-all delay-75"
+                                        >
+                                            <GrDownload className="text-gray-600 text-xs" />
+                                            Download Pdf
+                                        </a>
+                                    </div>
                                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr>
@@ -129,6 +144,19 @@ const StudentDetail = ({ auth, student }) => {
                                                     </tr>
                                                 ))}
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td
+                                                    scope="col"
+                                                    className="px-6 py-3 font-semibold"
+                                                >
+                                                    Total {totalScore()} /{" "}
+                                                    {student.standard.subjects
+                                                        .length * 100}
+                                                </td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                                 <div className="py-2 flex justify-end">

@@ -79,12 +79,14 @@ const TeachersIndex = ({ auth, teachers }) => {
                                                     )}
                                                 </td>
                                                 <td className="px-6 py-4 uppercase">
-                                                    <Link
-                                                        href={`/teachers/${teacher.id}/edit`}
-                                                        className="text-green-500 text-xs hover:underline transition-all delay-75"
-                                                    >
-                                                        Edit
-                                                    </Link>
+                                                    {!teacher.is_admin && (
+                                                        <Link
+                                                            href={`/teachers/${teacher.id}/edit`}
+                                                            className="text-green-500 text-xs hover:underline transition-all delay-75"
+                                                        >
+                                                            Edit
+                                                        </Link>
+                                                    )}
                                                 </td>
                                             </tr>
                                         ))}

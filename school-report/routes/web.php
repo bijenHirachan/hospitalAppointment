@@ -6,9 +6,13 @@ use App\Http\Controllers\StandardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
+use App\Models\Standard;
+use App\Models\Student;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,10 +36,15 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+        "teachers" => User::count() - 1,
+        "students" => Student::count(),
+        "standards" => Standard::count()
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get("view-pdf/{student}", [StudentController::class, "viewPdf"]);
     Route::resource("standards", StandardController::class);
     Route::resource("teachers", UserController::class);
     Route::resource("subjects", SubjectController::class);

@@ -20,7 +20,7 @@ class StandardController extends Controller
     {
         if(auth()->user()->is_admin){
             return Inertia::render("Standards/StandardsIndex", [
-                "standards" => Standard::all()
+                "standards" => Standard::with("students", "subjects", "user")->get()
             ]);
         }
      

@@ -8,6 +8,10 @@ use App\Http\Requests\UpdateSubjectRequest;
 
 class SubjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Subject::class);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -64,6 +68,6 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        $subject->delete();
     }
 }

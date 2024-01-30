@@ -55,57 +55,70 @@ const StandardDetails = ({ auth, standard }) => {
         >
             <Head title={`${standard.title} ${standard.section}`} />
 
+            {auth.user.is_admin === 1 && (
+                <div className="pt-12">
+                    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                            <div className="p-6 text-gray-900">
+                                <h2 className="text-lg mb-2 text-gray-700 font-semibold">
+                                    Subjects
+                                </h2>
+                                <div className="grid grid-cols-12 gap-3">
+                                    <form
+                                        onSubmit={createSubjectHandler}
+                                        className="col-span-12 sm:col-span-4 flex flex-col gap-4 bg-gray-300 h-fit rounded-md p-4"
+                                    >
+                                        <div className="flex flex-col">
+                                            <label className="text-xs text-gray-700">
+                                                Title
+                                            </label>
+                                            <input
+                                                value={subjectData.title}
+                                                onChange={(e) =>
+                                                    setSubjectData(
+                                                        "title",
+                                                        e.target.value
+                                                    )
+                                                }
+                                                placeholder="Subject title"
+                                                type="text"
+                                                className="px-2 py-1 text-sm border-none outline-none bg-whitefocus:ring-0 rounded"
+                                            />
+                                        </div>
+
+                                        <button
+                                            disabled={subjectProgress}
+                                            className="px-2 py-1 text-white leading-6 text-sm bg-gray-600 rounded"
+                                        >
+                                            Create
+                                        </button>
+                                    </form>
+
+                                    {standard.subjects.length > 0 && (
+                                        <div className="col-span-12 sm:col-span-8">
+                                            <SubjectsTable
+                                                subjects={standard.subjects}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <div className="flex pb-4 justify-between">
-                                <h2 className=" text-lg text-gray-700 font-semibold">
-                                    Subjects
-                                </h2>
-                                <form
-                                    onSubmit={createSubjectHandler}
-                                    className="flex"
-                                >
-                                    <input
-                                        value={subjectData.title}
-                                        onChange={(e) =>
-                                            setSubjectData(
-                                                "title",
-                                                e.target.value
-                                            )
-                                        }
-                                        placeholder="Subject name"
-                                        type="text"
-                                        className="px-2 py-1 text-sm border-none outline-none bg-gray-400 focus:ring-0 rounded-l-md"
-                                    />
-                                    <button
-                                        disabled={subjectProgress}
-                                        className="px-2 py-1 text-white leading-6 text-sm bg-gray-600 rounded-r-md"
-                                    >
-                                        Create
-                                    </button>
-                                </form>
-                            </div>
-                            {standard.subjects.length > 0 && (
-                                <SubjectsTable subjects={standard.subjects} />
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="pb-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            <div className="flex pb-4 justify-between">
-                                <h2 className=" text-lg text-gray-700 font-semibold">
-                                    Students
-                                </h2>
+                            <h2 className="text-lg mb-2 text-gray-700 font-semibold">
+                                Students
+                            </h2>
+                            <div className="grid grid-cols-12 gap-3">
                                 <form
                                     onSubmit={createStudentHandler}
-                                    className="flex flex-col gap-2"
+                                    className="col-span-12 sm:col-span-4 flex flex-col gap-4 bg-gray-300 h-fit rounded-md p-4"
                                 >
                                     <div className="flex flex-col">
                                         <label className="text-xs text-gray-700">
@@ -118,7 +131,7 @@ const StandardDetails = ({ auth, standard }) => {
                                             }
                                             placeholder="Student name"
                                             type="text"
-                                            className="px-2 py-1 text-sm border-none outline-none bg-gray-400 focus:ring-0 rounded"
+                                            className="px-2 py-1 text-sm border-none outline-none bg-whitefocus:ring-0 rounded"
                                         />
                                     </div>
                                     <div className="flex flex-col">
@@ -131,9 +144,8 @@ const StandardDetails = ({ auth, standard }) => {
                                             onChange={(e) =>
                                                 setData("dob", e.target.value)
                                             }
-                                            placeholder="Subject name"
                                             type="date"
-                                            className="px-2 py-1 text-sm border-none outline-none bg-gray-400 focus:ring-0 rounded"
+                                            className="px-2 py-1 text-sm border-none outline-none bg-white focus:ring-0 rounded"
                                         />
                                     </div>
                                     <button
@@ -143,11 +155,15 @@ const StandardDetails = ({ auth, standard }) => {
                                         Create
                                     </button>
                                 </form>
-                            </div>
 
-                            {standard.students.length > 0 && (
-                                <StudentsTable students={standard.students} />
-                            )}
+                                {standard.students.length > 0 && (
+                                    <div className="col-span-12 sm:col-span-8">
+                                        <StudentsTable
+                                            students={standard.students}
+                                        />
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>

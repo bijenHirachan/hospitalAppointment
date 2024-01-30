@@ -6,7 +6,6 @@ const EditTeacher = ({ auth, teacher, standards, errors }) => {
     const { data, setData, put, progress } = useForm({
         name: teacher?.name,
         email: teacher?.email,
-        dob: teacher?.dob,
         changeStandard: false,
         standard: "",
     });
@@ -21,11 +20,11 @@ const EditTeacher = ({ auth, teacher, standards, errors }) => {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Create Teacher
+                    Update Teacher
                 </h2>
             }
         >
-            <Head title="Create Teacher" />
+            <Head title="Update Teacher" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -78,27 +77,6 @@ const EditTeacher = ({ auth, teacher, standards, errors }) => {
                                     {errors.email}
                                 </span>
                             </div>
-                            <div className="mb-5">
-                                <label
-                                    htmlFor="dob"
-                                    className="block mb-2 text-sm font-medium text-gray-900"
-                                >
-                                    Date Of Birth
-                                </label>
-                                <input
-                                    type="date"
-                                    id="dob"
-                                    value={data.dob}
-                                    onChange={(e) =>
-                                        setData("dob", e.target.value)
-                                    }
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    required
-                                />
-                                <span className="text-xs text-red-500">
-                                    {errors.dob}
-                                </span>
-                            </div>
 
                             <div className="mb-5">
                                 <label
@@ -109,8 +87,8 @@ const EditTeacher = ({ auth, teacher, standards, errors }) => {
                                 </label>
                                 <input
                                     value={
-                                        teacher.standard_teach
-                                            ? `${teacher?.standard_teach?.title} ${teacher?.standard_teach?.section} `
+                                        teacher.standard
+                                            ? `${teacher?.standard?.title} ${teacher?.standard?.section} `
                                             : "Not yet assigned"
                                     }
                                     readOnly
@@ -175,7 +153,7 @@ const EditTeacher = ({ auth, teacher, standards, errors }) => {
                                 type="submit"
                                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             >
-                                Create
+                                Update
                             </button>
                         </form>
                     </div>

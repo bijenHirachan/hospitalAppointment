@@ -11,6 +11,11 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, "teacher");
+    }
     /**
      * Display a listing of the resource.
      */
@@ -74,17 +79,44 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $teacher)
     {
-        //
+        return Inertia::render("Teachers/EditTeacher",[
+            "teacher" => $teacher->load("standard"),
+            "standards" => Standard::where("user_id", NULL)->get()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $teacher)
     {
-        //
+        $validated = $request->validate([
+            "name" => "required",
+            "email" => "required|email|unique:users,email, $teacher->id",
+            "changeStandard" => "required",
+            "standard" => "nullable",
+        ]);
+
+        if($validated["changeStandard"]){
+            
+           DB::transaction(function() use($teacher, $validated){
+
+            $oldStandard = Standard::where("user_id", $teacher->id)->first();
+
+            if($oldStandard){
+                $oldStandard->user()->dissociate();
+                $oldStandard->save();
+            }
+
+            $newStandard = Standard::find($validated["standard"]);
+
+            $newStandard->user()->associate($teacher);
+
+            $newStandard->save();
+           });
+        }
     }
 
     /**
