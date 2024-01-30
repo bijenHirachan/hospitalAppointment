@@ -6,15 +6,12 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 
-export default function Register({ standards }) {
+export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
         password: "",
         password_confirmation: "",
-        dob: "",
-        standard: "",
-        student: true,
     });
 
     useEffect(() => {
@@ -34,17 +31,6 @@ export default function Register({ standards }) {
             <Head title="Register" />
 
             <form onSubmit={submit}>
-                <div className="mb-2">
-                    <button
-                        type="button"
-                        onClick={() => setData("student", !data.student)}
-                        className="border border-gray-400 px-1"
-                    >
-                        {data.student
-                            ? "Register as a teacher"
-                            : "Register as a student"}
-                    </button>
-                </div>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 
@@ -78,53 +64,6 @@ export default function Register({ standards }) {
 
                     <InputError message={errors.email} className="mt-2" />
                 </div>
-                <div className="mt-4">
-                    <InputLabel htmlFor="dob" value="DOB" />
-
-                    <TextInput
-                        id="dob"
-                        type="date"
-                        name="dob"
-                        value={data.dob}
-                        className="mt-1 block w-full"
-                        onChange={(e) => setData("dob", e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.dob} className="mt-2" />
-                </div>
-
-                {data.student && (
-                    <div className="mt-4">
-                        <InputLabel htmlFor="standard" value="Standard" />
-
-                        <select
-                            id="standard"
-                            name="standard"
-                            value={data.standard}
-                            className="mt-1 block w-full uppercase"
-                            onChange={(e) =>
-                                setData("standard", e.target.value)
-                            }
-                            required
-                        >
-                            {standards.length > 0 &&
-                                standards.map((sta) => (
-                                    <option
-                                        className="uppercase"
-                                        key={sta.id}
-                                        value={sta.id}
-                                    >
-                                        {sta.title} {sta.section}
-                                    </option>
-                                ))}
-                        </select>
-                        <InputError
-                            message={errors.standard}
-                            className="mt-2"
-                        />
-                    </div>
-                )}
 
                 <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password" />

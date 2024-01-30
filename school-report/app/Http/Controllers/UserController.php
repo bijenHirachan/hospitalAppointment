@@ -16,9 +16,7 @@ class UserController extends Controller
     {
         $this->authorizeResource(User::class, "teacher");
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         return Inertia::render("Teachers/TeachersIndex", [
@@ -26,9 +24,6 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return Inertia::render("Teachers/CreateTeacher",[
@@ -36,9 +31,6 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -68,17 +60,6 @@ class UserController extends Controller
        
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(User $teacher)
     {
         return Inertia::render("Teachers/EditTeacher",[
@@ -87,9 +68,6 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, User $teacher)
     {
         $validated = $request->validate([
@@ -119,11 +97,19 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(User $teacher)
     {
-        //
+
+        DB::transaction(function () use($teacher){
+            $teacher->standard->update([
+                'user_id' => NULL
+            ]);
+    
+            $teacher->delete();
+        });
+       
+
+        return to_route("teachers.index");
     }
+
 }

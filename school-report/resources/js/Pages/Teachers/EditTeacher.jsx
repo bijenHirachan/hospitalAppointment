@@ -1,8 +1,25 @@
+import Modal from "@/Components/Modal";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, Link, router, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const EditTeacher = ({ auth, teacher, standards, errors }) => {
+    const [showModal, setShowModal] = useState(false);
+
+    const deleteTeacher = () => {
+        setShowModal(false);
+
+        router.delete(`/teachers/${teacher?.id}`, {
+            preserveState: true,
+            preserveScroll: true,
+            replace: true,
+            onSuccess: () => {
+                toast.success("Teacher deleted successfully!");
+            },
+        });
+    };
+
     const { data, setData, put, progress } = useForm({
         name: teacher?.name,
         email: teacher?.email,
@@ -28,6 +45,40 @@ const EditTeacher = ({ auth, teacher, standards, errors }) => {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <Modal
+                        maxWidth="md"
+                        show={showModal}
+                        closeable
+                        onClose={() => {
+                            setShowModal(false);
+                        }}
+                    >
+                        <div className="p-3">
+                            {teacher && (
+                                <p className="text-gray-600 text-sm tracking-wide leading-6">
+                                    Are you sure you want to delete{" "}
+                                    {teacher?.name} ?
+                                </p>
+                            )}
+
+                            <div className="flex justify-end pt-2 gap-2">
+                                <button
+                                    onClick={() => {
+                                        setShowModal(false);
+                                    }}
+                                    className="border px-1 border-green-500 text-sm text-green-500 tracking-wide rounded leading-6 hover:border-green-700 hover:text-green-700 transition-all delay-75"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={deleteTeacher}
+                                    className="border px-1 border-red-500 text-sm text-red-500 tracking-wide rounded leading-6 hover:border-red-700 hover:text-red-700 transition-all delay-75"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </Modal>
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
                         <form
                             onSubmit={submitHandler}
@@ -148,13 +199,22 @@ const EditTeacher = ({ auth, teacher, standards, errors }) => {
                                 </div>
                             )}
 
-                            <button
-                                disabled={progress}
-                                type="submit"
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            >
-                                Update
-                            </button>
+                            <div className="flex justify-between">
+                                <button
+                                    onClick={() => setShowModal(true)}
+                                    type="button"
+                                    className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                                >
+                                    Delete
+                                </button>
+                                <button
+                                    disabled={progress}
+                                    type="submit"
+                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                >
+                                    Update
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

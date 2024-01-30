@@ -46,10 +46,10 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get("view-pdf/{student}", [StudentController::class, "viewPdf"]);
     Route::resource("standards", StandardController::class);
-    Route::resource("teachers", UserController::class);
-    Route::resource("subjects", SubjectController::class);
-    Route::resource("students", StudentController::class);
-    Route::resource("scores", ScoreController::class);
+    Route::resource("teachers", UserController::class)->except("show");
+    Route::resource("subjects", SubjectController::class)->only("store","destroy");
+    Route::resource("students", StudentController::class)->only("store","show", "destroy");
+    Route::resource("scores", ScoreController::class)->only("store");
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
