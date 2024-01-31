@@ -88,7 +88,7 @@ const StandardDetails = ({ auth, standard }) => {
 
                                         <button
                                             disabled={subjectProgress}
-                                            className="px-2 py-1 text-white leading-6 text-sm bg-gray-600 rounded"
+                                            className="px-2 py-1 text-white leading-6 text-sm bg-gray-600 rounded hover:bg-gray-800 transition-all delay-75"
                                         >
                                             Create
                                         </button>
@@ -150,7 +150,7 @@ const StandardDetails = ({ auth, standard }) => {
                                     </div>
                                     <button
                                         disabled={progress}
-                                        className="px-2 py-1 text-white leading-6 text-sm bg-gray-600 rounded"
+                                        className="px-2 py-1 text-white leading-6 text-sm bg-gray-600 rounded hover:bg-gray-800 transition-all delay-75"
                                     >
                                         Create
                                     </button>

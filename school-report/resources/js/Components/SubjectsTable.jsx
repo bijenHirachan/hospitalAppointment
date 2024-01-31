@@ -92,7 +92,7 @@ const SubjectsTable = ({ subjects }) => {
                                 <td className="px-6 py-4">
                                     <span
                                         onClick={() => subjectHandler(subject)}
-                                        className="font-medium cursor-pointer text-blue-600 dark:text-blue-500 hover:underline"
+                                        className="font-medium cursor-pointer text-red-500 hover:underline transition-all delay-75"
                                     >
                                         Delete
                                     </span>

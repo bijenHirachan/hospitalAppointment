@@ -18,9 +18,9 @@ export default function Dashboard({ auth, teachers, students, standards }) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-gray-200 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 grid grid-cols-12 gap-2">
-                            <div className="col-span-12 sm:col-span-4  bg-sky-200 rounded shadow p-2 flex flex-col items-center justify-center gap-4">
+                            <div className="col-span-12 sm:col-span-4  bg-white rounded shadow p-2 flex flex-col items-center justify-center gap-4">
                                 <h3 className="text-lg text-gray-600 font-semibold">
                                     Teachers
                                 </h3>
@@ -29,7 +29,7 @@ export default function Dashboard({ auth, teachers, students, standards }) {
                                     {teachers}
                                 </p>
                             </div>
-                            <div className="col-span-12 sm:col-span-4 bg-sky-200 rounded shadow p-2 flex flex-col items-center justify-center gap-4">
+                            <div className="col-span-12 sm:col-span-4 bg-white rounded shadow p-2 flex flex-col items-center justify-center gap-4">
                                 <h3 className="text-lg text-gray-600 font-semibold">
                                     Students
                                 </h3>
@@ -38,7 +38,7 @@ export default function Dashboard({ auth, teachers, students, standards }) {
                                     {students}
                                 </p>
                             </div>
-                            <div className="col-span-12 sm:col-span-4 bg-sky-200 rounded shadow p-2 flex flex-col items-center justify-center gap-4">
+                            <div className="col-span-12 sm:col-span-4 bg-white rounded shadow p-2 flex flex-col items-center justify-center gap-4">
                                 <h3 className="text-lg text-gray-600 font-semibold">
                                     Standards
                                 </h3>

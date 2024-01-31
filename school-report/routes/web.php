@@ -45,7 +45,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get("view-pdf/{student}", [StudentController::class, "viewPdf"]);
-    Route::resource("standards", StandardController::class);
+    Route::resource("standards", StandardController::class)->only("index", "show");
     Route::resource("teachers", UserController::class)->except("show");
     Route::resource("subjects", SubjectController::class)->only("store","destroy");
     Route::resource("students", StudentController::class)->only("store","show", "destroy");

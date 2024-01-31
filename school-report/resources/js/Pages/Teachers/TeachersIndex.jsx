@@ -1,8 +1,30 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
-import React from "react";
+import { Head, Link, router } from "@inertiajs/react";
+import React, { useEffect, useState } from "react";
 
-const TeachersIndex = ({ auth, teachers }) => {
+const TeachersIndex = ({ auth, teachers, searchString }) => {
+    const [search, setSearch] = useState(searchString ?? "");
+
+    const getTeachers = () => {
+        router.get(
+            "/teachers",
+            {
+                search,
+            },
+            {
+                preserveScroll: true,
+                preserveState: true,
+                replace: true,
+            }
+        );
+    };
+
+    useEffect(() => {
+        const searchHandler = setTimeout(() => getTeachers(), 500);
+
+        return () => clearTimeout(searchHandler);
+    }, [search]);
+
     return (
         <Authenticated
             user={auth.user}
@@ -16,11 +38,18 @@ const TeachersIndex = ({ auth, teachers }) => {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
-                        <div className="flex justify-end py-4">
+                    <div className="bg-gray-200 overflow-hidden shadow-sm sm:rounded-lg p-4">
+                        <div className="flex justify-between py-4">
+                            <input
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                type="text"
+                                placeholder="Search..."
+                                className="border-none outline-none focus:ring-0 rounded search"
+                            />
                             <Link
                                 href={`/teachers/create`}
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                className="px-4 py-2 text-white leading-6 text-sm bg-gray-600 rounded-lg hover:bg-gray-800 transition-all delay-75"
                             >
                                 Create Teacher
                             </Link>

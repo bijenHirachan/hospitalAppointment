@@ -20,7 +20,7 @@ const EditTeacher = ({ auth, teacher, standards, errors }) => {
         });
     };
 
-    const { data, setData, put, progress } = useForm({
+    const { data, setData, put, progress, reset } = useForm({
         name: teacher?.name,
         email: teacher?.email,
         changeStandard: false,
@@ -30,7 +30,9 @@ const EditTeacher = ({ auth, teacher, standards, errors }) => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        put(`/teachers/${teacher.id}`);
+        put(`/teachers/${teacher.id}`, {
+            onSuccess: () => reset("changeStandard", "standard"),
+        });
     };
     return (
         <Authenticated
@@ -203,14 +205,14 @@ const EditTeacher = ({ auth, teacher, standards, errors }) => {
                                 <button
                                     onClick={() => setShowModal(true)}
                                     type="button"
-                                    className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                                    className="px-4 py-2 text-white leading-6 text-sm bg-red-600 rounded-lg hover:bg-red-800 transition-all delay-75"
                                 >
                                     Delete
                                 </button>
                                 <button
                                     disabled={progress}
                                     type="submit"
-                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                    className="px-4 py-2 text-white leading-6 text-sm bg-gray-600 rounded-lg hover:bg-gray-800 transition-all delay-75"
                                 >
                                     Update
                                 </button>

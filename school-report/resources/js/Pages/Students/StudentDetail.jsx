@@ -162,7 +162,7 @@ const StudentDetail = ({ auth, student }) => {
                                 <div className="py-2 flex justify-end">
                                     <button
                                         onClick={updateScore}
-                                        className="px-2 py-1 text-white leading-6 text-sm bg-gray-600 rounded"
+                                        className="px-2 py-1 text-white leading-6 text-sm bg-gray-600 rounded hover:bg-gray-800 transition-all delay-75"
                                     >
                                         Update
                                     </button>

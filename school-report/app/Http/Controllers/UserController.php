@@ -17,10 +17,14 @@ class UserController extends Controller
         $this->authorizeResource(User::class, "teacher");
     }
 
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render("Teachers/TeachersIndex", [
-            "teachers" => User::with("standard")->get()
+            "teachers" => User::with("standard")
+                    ->where("name", "LIKE", "%".$request->query("search")."%" )
+                    ->orWhere("email", "LIKE", "%".$request->query("search")."%" )
+                    ->get(),
+            "searchString" => $request->query("search")
         ]);
     }
 

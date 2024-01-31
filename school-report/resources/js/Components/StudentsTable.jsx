@@ -105,7 +105,7 @@ const StudentsTable = ({ students }) => {
                                 <td className="px-6 py-4">
                                     <button
                                         onClick={() => studentHandler(student)}
-                                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                        className="font-medium text-red-500 hover:underline transition-all delay-75"
                                     >
                                         Delete
                                     </button>
