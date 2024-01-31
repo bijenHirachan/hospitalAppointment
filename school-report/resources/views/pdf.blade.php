@@ -91,8 +91,8 @@
         <table class="w-full">
             <tr>
                 <td class="w-half">
-                    <div>{{ $student->name }}</div>
-                    <div>{{ $student->dob }}</div>
+                    <div>Name: {{ $student->name }}</div>
+                    <div>DOB: {{ $student->dob }}</div>
                 </td>
                 <td class="w-half text-right">
                     <div>Teacher: {{ $teacher ?? 'N/A' }}</div>
